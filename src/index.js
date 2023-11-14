@@ -7,7 +7,7 @@
  * @module smartUpload
  * @author sunxiaoshen
  */
-import axios from './axios';
+import axios from 'axios';
 import SparkMD5 from 'spark-md5';
 import pAll from 'p-all';
 import {stringify} from 'querystring';
