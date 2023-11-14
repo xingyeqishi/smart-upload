@@ -4,7 +4,7 @@ smart-upload is a JavaScript library for implementing chunked file uploads, desi
 
 ## Installation
 
-You can install smart-Upload via npm
+You can install smart-upload via npm
 
 ```
 npm install smart-upload
