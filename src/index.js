@@ -75,9 +75,10 @@ const smartUpload = {
  */
 const checkExistByMd5 = async (checkUrl, md5, filename, chunkSize) =>
   await axios.get(`${checkUrl}?${stringify({file_md5: md5, chunk_size: chunkSize, filename})}`).then(res => {
-    if (res.response_code === 0) {
-      return res.data;
+    if (res.data.response_code === 0) {
+      return res.data.data;
     }
+    return {status: false};
   });
 
 /**
