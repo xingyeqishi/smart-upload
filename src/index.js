@@ -26,11 +26,13 @@ const smartUpload = {
   checkUrl: '',
   mergeUrl: '',
   uploadUrl: '',
-  config: function ({workerPrefix, checkUrl, mergeUrl, uploadUrl}){
+  concurrency: 5,
+  config: function ({workerPrefix, checkUrl, mergeUrl, uploadUrl, concurrency}){
       this.workerPrefix = workerPrefix;
       this.checkUrl = checkUrl;
       this.mergeUrl = mergeUrl;
       this.uploadUrl = uploadUrl;
+      this.concurrency = concurrency || 5;
   },
   upload: async function(file, onProgress, processUrl) {
     let chunkByte = 10 * 1024 * 1024;
@@ -51,7 +53,7 @@ const smartUpload = {
       return true;
     });
 
-    const results = await pAll(promises, {concurrency: 5, stepOnError: false});
+    const results = await pAll(promises, {concurrency: this.concurrency, stepOnError: false});
     if (results.filter(i => i).length === results.length) {
       const mergeResult = await axios.post(this.mergeUrl, {filename: file.name, file_md5: md5});
       if (mergeResult.data.response_code === 0) {
