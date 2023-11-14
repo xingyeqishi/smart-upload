@@ -9,10 +9,22 @@ You can install smart-Upload via npm
 ```
 npm install smart-upload
 ```
+Due to the use of the web worker for compute file hash, you need to add webpack configuration.
+```
+new CopyPlugin({
+   patterns: [
+     {
+       from: paths.base('node_modules/smart-upload/worker/'),
+       to: paths.dist('other/worker/')
+     }
+   ]
+ }),
+```
 ## Usage
 ### Configuration
 Before uploading files, you need to configure Smart-Upload using the config API. The following parameters are available:
 
++ prefix: The prefix for loading web worker files. In comparison to the webpack configuration above, here you should write '/other'.
 + checkUrl: The URL for checking the status of uploaded chunks.
 + uploadUrl: The URL for uploading individual file chunks.
 + mergeUrl: The URL for merging uploaded chunks into the complete file.
