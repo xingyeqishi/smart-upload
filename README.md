@@ -19,14 +19,18 @@ Before uploading files, you need to configure Smart-Upload using the config API.
 + concurrency: The number of concurrent upload tasks(default value 5).
 
 Example:
+```
+import smartUpload from 'smart-upload';
+
 const config = {
   checkUrl: '/check',
   uploadUrl: '/upload',
   mergeUrl: '/merge',
   concurrency: 3
 };
-
 smartUpload.config(config);
+```
+
 ### Uploading
 To initiate the file upload, use the upload API. Pass in the file to upload, a callback function for progress updates, and the URL for processing the uploaded chunks.
 ```
