@@ -27,7 +27,6 @@ const smartUpload = {
   mergeUrl: '',
   uploadUrl: '',
   config: function ({workerPrefix, checkUrl, mergeUrl, uploadUrl}){
-      console.log(this);
       this.workerPrefix = workerPrefix;
       this.checkUrl = checkUrl;
       this.mergeUrl = mergeUrl;
@@ -110,7 +109,6 @@ const execUpload = async (url, chunk, index, chunkMd5, md5, chunkSize, onProgres
         }
         return true;
       }
-      console.error(`分片上传失败${index}`);
       return Promise.reject(false);
     });
 };
