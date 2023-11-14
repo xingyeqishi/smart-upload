@@ -43,7 +43,7 @@ const smartUpload = {
     const {chunkSize, chunkList} = await splitChunks(file, chunkByte);
     const checkResult = await checkExistByMd5(this.checkUrl, md5, file.name, chunkSize);
     if (checkResult.status) {
-      return await axios.post(this.processUrl, {path: checkResult.path});
+      return await axios.post(this.processUrl, {path: checkResult.path}).then(res => res.data);
     }
     const promises = chunkList.map((chunk, index) => () => {
       if (checkResult.chunk_ids.includes(index)) {
@@ -55,10 +55,10 @@ const smartUpload = {
     const results = await pAll(promises, {concurrency: 5, stepOnError: false});
     if (results.filter(i => i).length === results.length) {
       const mergeResult = await axios.post(this.mergeUrl, {filename: file.name, file_md5: md5});
-      if (mergeResult.response_code === 0) {
-        return await axios.post(processUrl, {path: mergeResult.data}).then(res => {
+      if (mergeResult.data.response_code === 0) {
+        return await axios.post(processUrl, {path: mergeResult.data.data}).then(res => {
           onProgress && onProgress(chunkSize - 1, chunkSize);
-          return res;
+          return res.data;
         });
       }
     }
@@ -104,7 +104,7 @@ const execUpload = async (url, chunk, index, chunkMd5, md5, chunkSize, onProgres
       }
     })
     .then(res => {
-      if (res.response_code === 0) {
+      if (res.data.response_code === 0) {
         if (index < chunkSize - 1) {
           onProgress && onProgress(index, chunkSize);
         }
