@@ -1,6 +1,6 @@
 {
   "name": "smart-upload",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "smart-upload is a JavaScript library for implementing chunked file uploads, designed to simplify the process of uploading large files with enhanced control over the upload process. It provides a set of APIs for configuration and uploading.",
   "main": "src/index.js",
   "scripts": {
@@ -10,7 +10,9 @@
     "type": "git",
     "url": "git@github.com:xingyeqishi/smart-upload.git"
   },
-  "keywords": ["split chunk upload"],
+  "keywords": [
+    "split chunk upload"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
