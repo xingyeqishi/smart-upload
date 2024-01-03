@@ -53,7 +53,8 @@ smartUpload.upload({
   onProgress: (chunk, totalChunk) => {
     console.log(`Uploading chunk: ${chunk}%`);
   },
-  processUrl: '/process'
+  processUrl: '/process',
+  extra: {id: 13}  //可选配置
 });
 ```
 ## License

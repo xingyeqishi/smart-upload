@@ -34,7 +34,7 @@ const smartUpload = {
       this.uploadUrl = uploadUrl;
       this.concurrency = concurrency || 5;
   },
-  upload: async function(file, onProgress, processUrl) {
+  upload: async function(file, onProgress, processUrl, extra = {}) {
     let chunkByte = 10 * 1024 * 1024;
     if (file.size < chunkByte) {
       chunkByte = file.size;
@@ -44,7 +44,7 @@ const smartUpload = {
     const {chunkSize, chunkList} = await splitChunks(file, chunkByte);
     const checkResult = await checkExistByMd5(this.checkUrl, md5, file.name, chunkSize);
     if (checkResult.status) {
-      return await axios.post(this.processUrl, {path: checkResult.path}).then(res => res.data);
+      return await axios.post(this.processUrl, {path: checkResult.path, ...extra}).then(res => res.data);
     }
     const promises = chunkList.map((chunk, index) => () => {
       if (checkResult.chunk_ids.includes(index)) {
