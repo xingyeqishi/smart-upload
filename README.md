@@ -54,7 +54,7 @@ smartUpload.upload({
     console.log(`Uploading chunk: ${chunk}%`);
   },
   processUrl: '/process',
-  extra: {id: 13}  //可选配置
+  extra: {id: 13}  //optional parameter 
 });
 ```
 ## License
