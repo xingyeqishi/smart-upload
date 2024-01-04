@@ -1,6 +1,6 @@
 {
   "name": "smart-upload",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "smart-upload is a JavaScript library for implementing chunked file uploads, designed to simplify the process of uploading large files with enhanced control over the upload process. It provides a set of APIs for configuration and uploading.",
   "main": "src/index.js",
   "scripts": {
