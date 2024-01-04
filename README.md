@@ -48,13 +48,13 @@ To initiate the file upload, use the upload API. Pass in the file to upload, a c
 ```
 const fileInput = document.getElementById('fileInput');
 
-smartUpload.upload({
-  file: fileInput.files[0],
-  onProgress: (chunk, totalChunk) => {
+smartUpload.upload(
+  fileInput.files[0],
+  (chunk, totalChunk) => {
     console.log(`Uploading chunk: ${chunk}%`);
   },
-  processUrl: '/process',
-  extra: {id: 13}  //optional parameter 
+  '/process',
+  {id: 13}  //optional parameter 
 });
 ```
 ## License
