@@ -35,6 +35,7 @@ Example:
 import smartUpload from 'smart-upload';
 
 const config = {
+  workerPrefix: '/intelligence',
   checkUrl: '/check',
   uploadUrl: '/upload',
   mergeUrl: '/merge',
