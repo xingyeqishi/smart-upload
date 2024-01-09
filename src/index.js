@@ -44,6 +44,7 @@ const smartUpload = {
     const {chunkSize, chunkList} = await splitChunks(file, chunkByte);
     const checkResult = await checkExistByMd5(this.checkUrl, md5, file.name, chunkSize);
     if (checkResult.status) {
+      onProgress && onProgress(99, 100);
       return await axios.post(processUrl, {path: checkResult.path, ...extra}).then(res => res.data);
     }
     const promises = chunkList.map((chunk, index) => () => {
