@@ -46,6 +46,8 @@ const smartUpload = {
     if (checkResult.status) {
       onProgress && onProgress(99, 100);
       return await axios.post(processUrl, {path: checkResult.path, ...extra}).then(res => res.data);
+    } else {
+      return Promise.reject(checkResult)
     }
     const promises = chunkList.map((chunk, index) => () => {
       if (checkResult.chunk_ids.includes(index)) {
@@ -62,9 +64,11 @@ const smartUpload = {
           onProgress && onProgress(chunkSize - 1, chunkSize);
           return res.data;
         });
+      } else {
+        return Promise.reject(mergeResult.data);
       }
     }
-    return Promise.resolve({response_code: -1});
+    return Promise.reject({response_code: -1});
   }
 }
 
@@ -80,7 +84,7 @@ const checkExistByMd5 = async (checkUrl, md5, filename, chunkSize) =>
     if (res.data.response_code === 0) {
       return res.data.data;
     }
-    return {status: false};
+    return {status: false, ...res.data};
   });
 
 /**
