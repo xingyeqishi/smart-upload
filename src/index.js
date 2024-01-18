@@ -47,7 +47,9 @@ const smartUpload = {
       onProgress && onProgress(99, 100);
       return await axios.post(processUrl, {path: checkResult.path, ...extra}).then(res => res.data);
     } else {
-      return Promise.reject(checkResult)
+      if (checkResult.response_code === -1) {
+        return Promise.reject(checkResult)
+      }
     }
     const promises = chunkList.map((chunk, index) => () => {
       if (checkResult.chunk_ids.includes(index)) {
